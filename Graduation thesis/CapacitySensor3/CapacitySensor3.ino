@@ -36,12 +36,12 @@ void loop()
     // Serial.print( "  Volt: " );
     // Serial.println( volt );
 
-    sound = 262 + (total1/10000)*232;
+    sound = 262.0 + (total1/10000.0)*232.0;
+    Serial.println(sound);
     tone(12 ,sound);
 
     if(total1>=800){
       digitalWrite(13, HIGH);
-
 
     }
     else{
