@@ -27,12 +27,13 @@ void loop()
 
     value = analogRead( VOL_PIN );
 
-    volt = value * 5.0 / 1023.0;
+    volt = value * 5000.0 / 1024.0;
 
     Serial.print( "Value: " );
     Serial.print( value );
     Serial.print( "  Volt: " );
-    Serial.println( volt );
+    Serial.print( volt );
+    Serial.println("mV");
 
     if(total1>=800){
       digitalWrite(13, HIGH);
