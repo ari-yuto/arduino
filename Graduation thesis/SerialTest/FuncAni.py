@@ -24,11 +24,13 @@ def update(frame):
     # data = ser.readline().decode().strip()  # Arduinoからデータを読み込む
     val_arduino = ser.readline()
     data = pd.json_normalize(eval(val_arduino.decode()))
-    # print(data)
     y_data.append(float(data['DO']))
-    x_data.append(len(y_data))  # 自動的にx軸のデータを更新
+    x_data.append(int(data['time']))  # 自動的にx軸のデータを更新
     line.set_data(x_data, y_data)
-    ax.set_xlim(0, len(y_data))  # x軸を更新
+    if int(data['time']) > 100:
+        ax.set_xlim(int(data['time'])-100,int(data['time']) )  # x軸を更新  
+    else:
+        ax.set_xlim(0, int(data['time']))  # x軸を更新
     return line,
 
 # while True:
@@ -52,7 +54,7 @@ def update(frame):
     # plt.plot(Time, press)
     # plt.pause()
 
-ani = FuncAnimation(fig, update, init_func=init, blit=True , interval=50)
+ani = FuncAnimation(fig, update, init_func=init, blit=True , interval=53)
 plt.show()
 
 
