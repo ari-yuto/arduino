@@ -11,6 +11,10 @@ const int SENSOR_1_IN = 3;
 const int LED_PIN = 5;
 const int threshold = 10;
 
+unsigned long time_data = 0;
+unsigned long second = 0;
+unsigned long Time = 0;
+
 JSONVar doc;
 
 
@@ -64,6 +68,12 @@ void loop() {
 
   // Serial.println(analogRead(A0));
 
+  time_data = millis();
+  Time = time_data / 53;
+  // second = time_data / 1000L;
+  // Serial.println(second);
+
+  doc["time"] = Time;
   doc["DO"] = analogRead(A0); //センサの値を辞書に登録
   doc["D1"] = counter;
   doc["X"] = x;
