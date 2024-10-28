@@ -27,9 +27,9 @@ fig_CapSen, ax_CapSen = plt.subplots()
 line_CapSen, = ax_CapSen.plot([], [], lw=2)
 
 fig_accel, ax_accel = plt.subplots()
-line_accel_X, = ax_accel.plot([], [], lw=2)
-line_accel_Y, = ax_accel.plot([], [], lw=2)
-line_accel_Z, = ax_accel.plot([], [], lw=2)
+line_accel_X, = ax_accel.plot([], [], lw=2, label='X')
+line_accel_Y, = ax_accel.plot([], [], lw=2, label='Y')
+line_accel_Z, = ax_accel.plot([], [], lw=2, label='Z')
 
 
 #　初期化関数
@@ -93,6 +93,8 @@ def update_accel(frame):
 ani_press = FuncAnimation(fig_press, update_press, init_func=init, blit=True , interval=53)
 ani_CapSen = FuncAnimation(fig_CapSen, update_CapSen, init_func=init, blit=True , interval=100)
 ani_accel = FuncAnimation(fig_CapSen, update_accel, init_func=init, blit=True , interval=53)
+
+plt.legend()
 
 plt.show()
 
