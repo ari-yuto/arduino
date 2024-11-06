@@ -9,7 +9,7 @@
 const int SENSOR_1_OUT = 2;
 const int SENSOR_1_IN = 3;
 const int LED_PIN = 5;
-const int threshold = 10;
+const int threshold = 30;
 
 unsigned long time_data = 0;
 unsigned long second = 0;
@@ -54,16 +54,14 @@ void loop() {
     digitalWrite(LED_PIN, LOW);
   }
 
-  float x, y, z;
+  float x_accel, y_accel, z_accel, x_gyro, y_gyro, z_gyro;
 
   if (IMU.accelerationAvailable()) {
-    IMU.readAcceleration(x, y, z);
+    IMU.readAcceleration(x_accel, y_accel, z_accel);
+  }
 
-    // Serial.print("x:%lf",x);
-    // Serial.print('\t');
-    // Serial.print(y);
-    // Serial.print('\t');
-    // Serial.println(z);
+  if (IMU.gyroscopeAvailable()) {
+    IMU.readGyroscope(x_gyro, y_gyro, z_gyro);
   }
 
   // Serial.println(analogRead(A0));
@@ -76,9 +74,12 @@ void loop() {
   doc["time"] = Time;
   doc["DO"] = analogRead(A0); //センサの値を辞書に登録
   doc["D1"] = counter;
-  doc["X"] = x;
-  doc["Y"] = y;
-  doc["Z"] = z;
+  doc["X_accel"] = x_accel;
+  doc["Y_accel"] = y_accel;
+  doc["Z_accel"] = z_accel;
+  doc["X_gyro"] = x_gyro;
+  doc["Y_gyro"] = y_gyro;
+  doc["Z_gyro"] = z_gyro;
   Serial.println(doc); //Jsonが出力される
 
 }
